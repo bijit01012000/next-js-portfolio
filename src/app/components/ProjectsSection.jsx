@@ -29,8 +29,8 @@ const projectsData = [
     description: "Project 3 description",
     image: "/images/projects/ecommerce.png",
     tag: ["All", "MERN"],
-    gitUrl: "https://github.com/bijit01012000/E-Commerce-Application",
-    previewUrl: "https://github.com/bijit01012000/E-Commerce-Application",
+    gitUrl: "https://github.com/bijit01012000/E-commerce-mern",
+    previewUrl: "https://github.com/bijit01012000/E-commerce-mern",
   },
   {
     id: 4,
