@@ -1,8 +1,33 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
+import { CursorGlow } from "@/components/cursor-glow";
 import { site } from "@/lib/site";
 import "./globals.css";
+
+/** Person schema — helps search engines attribute the site to a real person. */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  url: site.url,
+  email: `mailto:${site.email}`,
+  jobTitle: "Software Development Engineer 2",
+  worksFor: { "@type": "Organization", name: "Rakuten Symphony" },
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "National Institute of Technology, Rourkela",
+  },
+  sameAs: [site.github, site.linkedin],
+  knowsAbout: [
+    "Java",
+    "Spring Boot",
+    "Distributed Systems",
+    "Observability",
+    "Retrieval-Augmented Generation",
+    "React",
+  ],
+};
 
 const inter = Inter({
   subsets: ["latin"],
@@ -91,8 +116,14 @@ export default function RootLayout({
           >
             Skip to content
           </a>
+          <CursorGlow />
           {children}
         </ThemeProvider>
+        <script
+          type="application/ld+json"
+          // Static object we control — no user input reaches this.
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </body>
     </html>
   );

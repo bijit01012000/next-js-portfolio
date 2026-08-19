@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, FileText, MapPin } from "lucide-react";
+import { ParticleField } from "@/components/hero/particle-field";
 import { RoleRotator } from "@/components/hero/role-rotator";
 import { Reveal } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
@@ -15,6 +16,7 @@ export function Hero() {
           All decorative, all pointer-events-none, none of it animated. */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute inset-0 grid-bg" />
+        <ParticleField className="absolute inset-0 size-full" />
         <div
           className="absolute -top-40 left-1/2 h-[36rem] w-[62rem] -translate-x-1/2 rounded-full blur-[120px]"
           style={{
