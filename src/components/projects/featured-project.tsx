@@ -91,7 +91,7 @@ export function FeaturedProject({ project }: { project: Project }) {
               className="pointer-events-none absolute inset-0 grid-bg opacity-60"
             />
             <h4 className="relative font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground">
-              Architecture — {project.services.length} services
+              Architecture — {project.servicesLabel ?? `${project.services.length} components`}
             </h4>
 
             <ul className="relative mt-5 flex flex-col gap-px">

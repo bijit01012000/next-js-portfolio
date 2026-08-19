@@ -43,15 +43,25 @@ export const experience: Experience[] = [
   },
   {
     company: "Candescent",
-    companyNote: "formerly part of NCR Corporation",
-    role: "Frontend / Full-Stack Engineer",
-    // TODO(bijit): confirm dates before deploy.
-    start: "TBC",
+    companyNote: "previously part of NCR Corporation",
+    role: "Software Engineer 1",
+    start: "Jul 2023",
     end: "Sep 2025",
-    draft: true,
     summary:
-      "Digital banking platform work across frontend and full-stack delivery.",
-    highlights: [],
-    stack: ["React", "JavaScript", "Node.js"],
+      "Digital banking platform work across frontend and backend, focused on the testing and certification pipeline behind products shipped to banks in the US and Europe.",
+    highlights: [
+      "Engineered **iSAT**, a testing platform managing over **10,000 testing parameters** and business attributes, cutting testing process time by **90%** through automation.",
+      "Built a **real-time analytics dashboard** visualising key execution metrics, with generated reports that reduced manual reporting effort by **70%** across stakeholders.",
+      "Cut **CAB testing from a month to 3–4 days**, materially accelerating product certification for digital banking solutions serving **500+ banks** across the US and Europe.",
+    ],
+    stack: [
+      "React",
+      "Spring Boot",
+      "Node.js",
+      "MySQL",
+      "MongoDB",
+      "JWT Auth",
+      "Azure VMs",
+    ],
   },
 ];

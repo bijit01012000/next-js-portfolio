@@ -129,7 +129,8 @@ export function Experience() {
 
         <Reveal className="mt-12">
           <p className="font-mono text-xs text-muted-foreground">
-            B.Tech, National Institute of Technology Rourkela
+            B.Tech, Metallurgy &amp; Materials Engineering — National Institute
+            of Technology Rourkela, 2018–2023
           </p>
         </Reveal>
       </div>

@@ -16,8 +16,10 @@ export type Project = {
   year?: string;
   /** Featured projects render as a full case-study panel. */
   featured?: boolean;
-  /** Service breakdown, featured projects only. */
+  /** Component breakdown, featured projects only. */
   services?: ProjectService[];
+  /** Label for the architecture column, e.g. "6 services" or "pipeline". */
+  servicesLabel?: string;
   /** The engineering-judgement talking point. */
   decision?: { title: string; body: string };
   /** Set while awaiting real content — rendered with a visible notice. */
@@ -52,6 +54,7 @@ export const projects: Project[] = [
       "AWS ECS Fargate",
       "GitHub Actions",
     ],
+    servicesLabel: "6 services",
     services: [
       {
         name: "api-gateway",
@@ -86,10 +89,51 @@ export const projects: Project[] = [
   {
     slug: "note-maxxer",
     title: "note-maxxer",
-    tagline: "Awaiting description",
-    description: "",
-    stack: [],
-    draft: true,
+    tagline: "AI interview-prep companion",
+    description:
+      "A spaced-repetition system that turns raw study material into compressed revision notes. Paste an article, URL, screenshot or YouTube link; Claude compresses it into a prioritised bullet note — with a Mermaid diagram when one genuinely aids recall — which then enters a Leitner review schedule. The full source is kept verbatim so any note can be drilled back down to its original context.",
+    featured: true,
+    year: "2026",
+    servicesLabel: "pipeline",
+    services: [
+      {
+        name: "ingest",
+        detail: "Text, URL (Jsoup), image, and YouTube transcript extraction",
+      },
+      {
+        name: "generate",
+        detail: "Shared preamble + per-topic prompt assembled at request time",
+      },
+      {
+        name: "review",
+        detail: "Draft returned for edit before it is ever persisted",
+      },
+      {
+        name: "schedule",
+        detail: "Leitner boxes 1–5 with interval-based next-review dates",
+      },
+      {
+        name: "deep-dive",
+        detail: "Cached AI expansion over the retained verbatim source",
+      },
+    ],
+    decision: {
+      title: "Prompts as data, not code",
+      body: "The obvious build is a category enum and a switch over hardcoded prompt strings. That makes every new topic a code change and a redeploy, and quietly pushes every topic toward one generic prompt. Instead topics are a first-class table, each owning its own prompt template, editable at runtime — a good DSA note needs a recognition trigger, a good HLD note needs trade-offs, and those are different instructions, not one template with a noun swapped. The same reasoning put note generation behind a NoteGenerationProvider interface with a stable JSON contract, so swapping Anthropic for OpenAI is a config property rather than a rewrite.",
+    },
+    stack: [
+      "Java",
+      "Spring Boot",
+      "Spring Data JPA",
+      "PostgreSQL",
+      "Flyway",
+      "Anthropic API",
+      "Jsoup",
+      "React",
+      "Tailwind CSS",
+      "Mermaid",
+      "Docker Compose",
+    ],
   },
   {
     slug: "job-tracker",
