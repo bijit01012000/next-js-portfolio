@@ -26,6 +26,8 @@ export type Project = {
   draft?: boolean;
   /** Descriptions inferred from repo names — user should confirm wording. */
   needsReview?: boolean;
+  /** Recent//stronger work: rendered with an accent border in the grid. */
+  accent?: boolean;
 };
 
 export const projects: Project[] = [
@@ -34,17 +36,18 @@ export const projects: Project[] = [
     title: "Tixolve",
     tagline: "AI knowledge & support platform",
     description:
-      "A retrieval-augmented support platform built as six independently deployable services. Users ask questions in natural language; the system retrieves from an indexed knowledge corpus, answers with an LLM, and escalates to a tracked ticket when it can't.",
+      "An enterprise knowledge and support platform built as six independently deployable services. Users ask questions in natural language; the system retrieves semantically from an indexed corpus, answers with an LLM, and escalates to a tracked ticket when it can't — with Redis caching responses and Kafka driving the ticket workflow.",
     featured: true,
-    year: "2025",
+    year: "Aug 2025 — Present",
     stack: [
-      "Java",
+      "Java 21",
       "Spring Boot",
       "Spring Cloud Gateway",
       "Keycloak",
       "PostgreSQL",
       "pgvector",
       "Kafka",
+      "Redis",
       "Ollama",
       "React",
       "TypeScript",
@@ -136,9 +139,39 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: "travelmate-ai",
+    title: "TravelMate AI",
+    tagline: "LLM itinerary generator",
+    description:
+      "A full-stack Next.js application that generates personalised city tour itineraries from user preferences via the OpenAI API, with a chatbot surfacing real-time tour recommendations. Reached 50+ users in its first month.",
+    stack: [
+      "Next.js 14",
+      "TypeScript",
+      "React Query",
+      "Tailwind CSS",
+      "OpenAI API",
+      "Clerk",
+      "Prisma",
+    ],
+    year: "2024",
+    accent: true,
+    needsReview: true,
+  },
+  {
+    slug: "job-tracker-v2",
+    title: "Job Tracker V2",
+    tagline: "Application tracker, rebuilt",
+    description:
+      "A rebuild of the original tracker on Next.js 14, with authentication and profile customisation via Clerk and Prisma-backed persistence. Handles 200+ tracked applications across breakpoints.",
+    stack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Clerk", "Prisma"],
+    year: "2025",
+    accent: true,
+    needsReview: true,
+  },
+  {
     slug: "job-tracker",
-    title: "Job Tracking App",
-    tagline: "Full-stack application tracker",
+    title: "Job Tracker V1",
+    tagline: "Original MERN tracker",
     description:
       "A MERN application for tracking job applications through their stages, with authentication and per-user persistence.",
     stack: ["MongoDB", "Express", "React", "Node.js", "JWT"],

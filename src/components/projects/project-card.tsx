@@ -2,11 +2,12 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { GitHubIcon } from "@/components/icons/brand";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 import type { Project } from "@/lib/content/projects";
 
 export function ProjectCard({ project }: { project: Project }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card/40 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card hover:shadow-[0_16px_48px_-24px_var(--primary)] motion-reduce:hover:translate-y-0">
+    <article className={cn("group relative flex h-full flex-col overflow-hidden rounded-xl border bg-card/40 transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-card hover:shadow-[0_16px_48px_-24px_var(--primary)] motion-reduce:hover:translate-y-0", project.accent ? "border-primary/25" : "border-border")}>
       {project.image ? (
         <div className="relative aspect-16/10 overflow-hidden border-b border-border bg-secondary/30">
           <Image
@@ -22,7 +23,19 @@ export function ProjectCard({ project }: { project: Project }) {
             className="absolute inset-0 bg-gradient-to-t from-card via-card/20 to-transparent opacity-80 transition-opacity duration-300 group-hover:opacity-50"
           />
         </div>
-      ) : null}
+      ) : (
+        // No screenshot: a generated panel keeps the grid rhythm even, rather
+        // than leaving short cards next to tall ones.
+        <div
+          aria-hidden
+          className="relative flex aspect-16/10 items-center justify-center overflow-hidden border-b border-border bg-secondary/20"
+        >
+          <div className="absolute inset-0 grid-bg opacity-70" />
+          <span className="relative font-mono text-2xl font-semibold tracking-tight text-primary/40">
+            {project.title}
+          </span>
+        </div>
+      )}
 
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">

@@ -1,8 +1,9 @@
 import type { ReactNode } from "react";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
+import { Award, GraduationCap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { experience } from "@/lib/content/experience";
+import { awards, education, experience } from "@/lib/content/experience";
 
 /**
  * Renders **bold** spans in a highlight string. Deliberately minimal — this
@@ -107,13 +108,6 @@ export function Experience() {
                     </ul>
                   ) : null}
 
-                  {job.draft ? (
-                    <p className="mt-5 rounded-lg border border-dashed border-primary/40 bg-primary/5 px-4 py-3 font-mono text-xs text-muted-foreground">
-                      ⚠ Placeholder — awaiting real highlights and dates. Must
-                      be filled in before deploy.
-                    </p>
-                  ) : null}
-
                   <ul className="mt-6 flex flex-wrap gap-1.5">
                     {job.stack.map((tech) => (
                       <li key={tech}>
@@ -127,12 +121,49 @@ export function Experience() {
           </RevealGroup>
         </div>
 
-        <Reveal className="mt-12">
-          <p className="font-mono text-xs text-muted-foreground">
-            B.Tech, Metallurgy &amp; Materials Engineering — National Institute
-            of Technology Rourkela, 2018–2023
-          </p>
-        </Reveal>
+        {/* Education & recognition */}
+        <div className="mt-14 grid gap-5 sm:grid-cols-2">
+          <Reveal className="h-full">
+            <div className="flex h-full flex-col rounded-xl border border-border bg-card/40 p-5">
+              <h3 className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                <GraduationCap aria-hidden className="size-3.5" />
+                Education
+              </h3>
+              <p className="mt-3.5 font-display text-base font-semibold">
+                {education.degree}
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                {education.institution}
+              </p>
+              <p className="mt-3 font-mono text-xs text-muted-foreground">
+                {education.period} &middot; {education.detail}
+              </p>
+            </div>
+          </Reveal>
+
+          <Reveal delay={0.08} className="h-full">
+            <div className="flex h-full flex-col rounded-xl border border-border bg-card/40 p-5">
+              <h3 className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                <Award aria-hidden className="size-3.5" />
+                Recognition
+              </h3>
+              <ul className="mt-3.5 flex flex-col gap-2">
+                {awards.map((award) => (
+                  <li
+                    key={award}
+                    className="flex gap-2.5 text-sm leading-relaxed text-muted-foreground"
+                  >
+                    <span
+                      aria-hidden
+                      className="mt-2 size-1.5 shrink-0 rounded-full bg-primary/60"
+                    />
+                    {award}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
