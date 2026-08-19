@@ -36,9 +36,10 @@ export const projects: Project[] = [
     title: "Tixolve",
     tagline: "AI knowledge & support platform",
     description:
-      "An enterprise knowledge and support platform built as six independently deployable services. Users ask questions in natural language; the system retrieves semantically from an indexed corpus, answers with an LLM, and escalates to a tracked ticket when it can't — with Redis caching responses and Kafka driving the ticket workflow.",
+      "An enterprise knowledge assistant fused with a support ticketing system, built as six independently deployable services. Users chat with an AI that answers from company documents with cited sources; when it signals low confidence — or the retrieved content scores below the similarity threshold — it auto-escalates to a human ticket rather than guessing. Redis caches responses, Kafka drives the ticket workflow.",
     featured: true,
     year: "Aug 2025 — Present",
+    repo: "https://github.com/bijit01012000/Tixolve",
     stack: [
       "Java 21",
       "Spring Boot",
@@ -97,6 +98,7 @@ export const projects: Project[] = [
       "A spaced-repetition system that turns raw study material into compressed revision notes. Paste an article, URL, screenshot or YouTube link; Claude compresses it into a prioritised bullet note — with a Mermaid diagram when one genuinely aids recall — which then enters a Leitner review schedule. The full source is kept verbatim so any note can be drilled back down to its original context.",
     featured: true,
     year: "2026",
+    repo: "https://github.com/bijit01012000/note-maxxer",
     servicesLabel: "pipeline",
     services: [
       {
@@ -154,9 +156,9 @@ export const projects: Project[] = [
       "Prisma",
     ],
     year: "2024",
+    repo: "https://github.com/bijit01012000/TravelMateAI",
     demo: "https://travel-mate-ai-eight.vercel.app",
     accent: true,
-    needsReview: true,
   },
   {
     slug: "job-tracker-v2",
@@ -166,9 +168,9 @@ export const projects: Project[] = [
       "A rebuild of the original tracker on Next.js 14, with authentication and profile customisation via Clerk and Prisma-backed persistence. Handles 200+ tracked applications across breakpoints.",
     stack: ["Next.js 14", "TypeScript", "Tailwind CSS", "Clerk", "Prisma"],
     year: "2025",
+    repo: "https://github.com/bijit01012000/jobTrackerV2",
     demo: "https://job-tracker-v2-six.vercel.app",
     accent: true,
-    needsReview: true,
   },
   {
     slug: "job-tracker",
@@ -179,7 +181,8 @@ export const projects: Project[] = [
     stack: ["MongoDB", "Express", "React", "Node.js", "JWT"],
     image: "/images/projects/jobTrackingApp.png",
     repo: "https://github.com/bijit01012000/jobTrackerV1-prod",
-    demo: "https://jobtrackerversion1.onrender.com/login",
+    // Demo link removed: the Render deployment no longer responds (90s, no
+    // reply). A "Live demo" button that hangs reads worse than none.
     needsReview: true,
   },
   {
