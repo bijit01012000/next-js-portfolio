@@ -6,7 +6,6 @@ import {
   AnimatePresence,
   motion,
   useMotionValueEvent,
-  useReducedMotion,
   useScroll,
 } from "motion/react";
 import { Menu, X, FileText } from "lucide-react";
@@ -16,13 +15,14 @@ import { useActiveSection } from "@/hooks/use-active-section";
 import { navLinks, site } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
-const sectionIds = navLinks.map((l) => l.href.replace("#", ""));
+// Hero is observed but has no nav link, so scrolling back to the top clears
+// the indicator rather than leaving a stale one highlighted.
+const sectionIds = ["hero", ...navLinks.map((l) => l.href.replace("#", ""))];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const active = useActiveSection(sectionIds);
-  const reduce = useReducedMotion();
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (y) => {
@@ -73,7 +73,7 @@ export function Navbar() {
                 >
                   {isActive ? (
                     <motion.span
-                      layoutId={reduce ? undefined : "nav-active"}
+                      layoutId="nav-active"
                       className="absolute inset-0 -z-10 rounded-full bg-secondary"
                       transition={{
                         type: "spring",
@@ -119,9 +119,9 @@ export function Navbar() {
         {open ? (
           <motion.div
             key="mobile-menu"
-            initial={reduce ? false : { opacity: 0, height: 0 }}
-            animate={reduce ? {} : { opacity: 1, height: "auto" }}
-            exit={reduce ? {} : { opacity: 0, height: 0 }}
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="overflow-hidden border-b border-border bg-background/95 backdrop-blur-xl md:hidden"
           >

@@ -11,7 +11,9 @@ import { useEffect, useState } from "react";
  * which matches where a reader's attention sits.
  */
 export function useActiveSection(ids: readonly string[]) {
-  const [active, setActive] = useState<string>(ids[0] ?? "");
+  // Starts empty, not ids[0]: at the top of the page the hero is in view and
+  // no nav section is, so highlighting the first link would be wrong.
+  const [active, setActive] = useState<string>("");
 
   useEffect(() => {
     const elements = ids

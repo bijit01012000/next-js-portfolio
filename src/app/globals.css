@@ -173,6 +173,25 @@
 }
 
 @layer utilities {
+  /* Above-the-fold entrance, driven by CSS rather than JS.
+     The hero is the LCP element — routing it through a JS-driven reveal means
+     it starts at opacity:0 and stays invisible until hydration, which pushed
+     mobile LCP to 3.3s. CSS animates from first paint instead.
+     `both` fill-mode means the reduced-motion backstop (which collapses the
+     duration) still lands on the final visible state. */
+  .rise {
+    animation: rise 0.6s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+    animation-delay: var(--rise-delay, 0ms);
+  }
+
+  /* For the LCP element specifically: slide without fading. Starting at
+     opacity:0 means the browser does not treat the text as painted until the
+     animation runs, which pushed LCP ~2.9s behind FCP on throttled mobile. */
+  .rise-slide {
+    animation: rise-slide 0.5s cubic-bezier(0.21, 0.47, 0.32, 0.98) both;
+    animation-delay: var(--rise-delay, 0ms);
+  }
+
   /* Film grain — pure CSS, no image request. Sits above the gradient,
      below content. */
   .grain::after {
@@ -181,7 +200,14 @@
     inset: 0;
     pointer-events: none;
     opacity: 0.035;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    /* background-size + repeat are load-bearing, not cosmetic: without them
+       the browser rasterizes feTurbulence across the whole viewport every
+       paint, which cost ~600ms of Style & Layout on throttled mobile. Tiling a
+       128px texture rasterizes the noise once. numOctaves is 2 rather than 4
+       for the same reason — at 3.5% opacity the extra octaves are invisible. */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 128px 128px;
+    background-repeat: repeat;
   }
 
   /* Subtle engineering-blueprint grid for the hero */
@@ -245,10 +271,30 @@
   }
 }
 
+@keyframes rise-slide {
+  from {
+    transform: translate3d(0, 0.6rem, 0);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* ---------------------------------------------------------------------------
    Accessibility: honour prefers-reduced-motion globally.
-   Motion components also check this via useReducedMotion(), but this is the
-   backstop for CSS-driven animation.
+   Motion handles it via MotionConfig reducedMotion="user"; this is the
+   backstop for CSS-driven animation such as .rise.
 --------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   html {

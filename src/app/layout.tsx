@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { CursorGlow } from "@/components/cursor-glow";
+import { MotionProvider } from "@/components/motion/motion-config";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -116,8 +117,10 @@ export default function RootLayout({
           >
             Skip to content
           </a>
-          <CursorGlow />
-          {children}
+          <MotionProvider>
+            <CursorGlow />
+            {children}
+          </MotionProvider>
         </ThemeProvider>
         <script
           type="application/ld+json"

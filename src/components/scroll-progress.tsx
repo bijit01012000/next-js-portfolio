@@ -1,13 +1,12 @@
 "use client";
 
-import { motion, useScroll, useSpring, useReducedMotion } from "motion/react";
+import { motion, useScroll, useSpring } from "motion/react";
 
 export function ScrollProgress() {
   const { scrollYProgress } = useScroll();
-  const reduce = useReducedMotion();
 
-  // Spring smooths the raw scroll value; skipped under reduced-motion so the
-  // bar tracks position exactly with no easing.
+  // Spring smooths the raw scroll value. Reduced motion is handled globally by
+  // MotionConfig rather than branched on here, which would break hydration.
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 260,
     damping: 40,
@@ -17,7 +16,7 @@ export function ScrollProgress() {
   return (
     <motion.div
       aria-hidden
-      style={{ scaleX: reduce ? scrollYProgress : scaleX }}
+      style={{ scaleX }}
       className="fixed inset-x-0 top-0 z-100 h-0.5 origin-left bg-primary"
     />
   );

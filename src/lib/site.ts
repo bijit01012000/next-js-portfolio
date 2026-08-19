@@ -17,9 +17,9 @@ export const site = {
 /** Rotating roles in the hero. Ordered strongest-signal-first. */
 export const roles = [
   "Full-Stack Engineer",
-  "Backend Engineer — Java & Spring Boot",
+  "Backend Engineer",
   "GenAI Systems Builder",
-  "Observability & Distributed Systems",
+  "Observability Engineer",
 ] as const;
 
 export const navLinks = [

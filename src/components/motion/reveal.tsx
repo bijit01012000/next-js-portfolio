@@ -1,20 +1,26 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { motion, type Variants } from "motion/react";
 import type { ReactNode } from "react";
 
 /**
- * Scroll-triggered reveal. Animates transform + opacity only (never layout
- * properties) so it stays on the compositor at 60fps.
+ * Scroll-triggered reveal. Animates transform + opacity only, so it stays on
+ * the compositor.
  *
- * When the user prefers reduced motion, children render immediately with no
- * transform — no fade, no slide.
+ * Reduced motion is NOT branched on here — see MotionProvider. Rendering a
+ * different element tree based on useReducedMotion() breaks hydration, because
+ * the server always sees `false`. MotionConfig applies the preference
+ * internally, so the DOM stays identical between server and client.
+ *
+ * These are below-the-fold only. The hero uses the CSS `.rise` utility instead,
+ * because it is the LCP element and must not wait for hydration to be visible.
  */
+
+const EASE = [0.21, 0.47, 0.32, 0.98] as const;
 
 type RevealProps = {
   children: ReactNode;
   className?: string;
-  /** Stagger offset in seconds, for manual sequencing. */
   delay?: number;
   y?: number;
   once?: boolean;
@@ -29,13 +35,7 @@ export function Reveal({
   once = true,
   as = "div",
 }: RevealProps) {
-  const reduce = useReducedMotion();
   const MotionTag = motion[as];
-
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
 
   return (
     <MotionTag
@@ -43,7 +43,7 @@ export function Reveal({
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once, margin: "-80px" }}
-      transition={{ duration: 0.5, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
+      transition={{ duration: 0.5, delay, ease: EASE }}
     >
       {children}
     </MotionTag>
@@ -64,13 +64,7 @@ export function RevealGroup({
   once?: boolean;
   as?: "div" | "ul" | "section";
 }) {
-  const reduce = useReducedMotion();
   const MotionTag = motion[as];
-
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
 
   const container: Variants = {
     hidden: {},
@@ -95,7 +89,7 @@ export const revealItemVariants: Variants = {
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.45, ease: [0.21, 0.47, 0.32, 0.98] },
+    transition: { duration: 0.45, ease: EASE },
   },
 };
 
@@ -108,13 +102,7 @@ export function RevealItem({
   className?: string;
   as?: "div" | "li" | "span";
 }) {
-  const reduce = useReducedMotion();
   const MotionTag = motion[as];
-
-  if (reduce) {
-    const Tag = as;
-    return <Tag className={className}>{children}</Tag>;
-  }
 
   return (
     <MotionTag className={className} variants={revealItemVariants}>
