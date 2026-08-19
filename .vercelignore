@@ -1,0 +1,11 @@
+# Vercel uploads the working directory, which is not the same set of files git
+# tracks. Keep local secrets and build output out of it explicitly.
+.env
+.env.*
+.next
+node_modules
+.git
+
+# Agent scratch files
+AGENTS.md
+CLAUDE.md

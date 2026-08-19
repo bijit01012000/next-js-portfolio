@@ -192,6 +192,12 @@
     animation-delay: var(--rise-delay, 0ms);
   }
 
+  /* Slow idle float for the hero portrait. Transform-only, so it stays on the
+     compositor; the reduced-motion backstop collapses it to a static pose. */
+  .float-y {
+    animation: float-y 6s ease-in-out infinite;
+  }
+
   /* Film grain — pure CSS, no image request. Sits above the gradient,
      below content. */
   .grain::after {
@@ -268,6 +274,16 @@
 @keyframes rotate-angle {
   to {
     --angle: 360deg;
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0);
   }
 }
 

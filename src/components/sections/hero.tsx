@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowDown, ArrowUpRight, FileText, MapPin } from "lucide-react";
 import { ParticleField } from "@/components/hero/particle-field";
@@ -34,7 +35,8 @@ export function Hero() {
         <div className="absolute inset-0 grain" />
       </div>
 
-      <div className="mx-auto w-full max-w-6xl">
+      <div className="mx-auto grid w-full max-w-6xl items-center gap-12 lg:grid-cols-[1.1fr_auto]">
+        <div>
         {/* Availability / role pill */}
         <div className="rise-slide">
           <span className="inline-flex items-center gap-2.5 rounded-full border border-border bg-card/60 px-3.5 py-1.5 font-mono text-xs text-muted-foreground backdrop-blur">
@@ -99,6 +101,45 @@ export function Hero() {
               /
             </span>
             <span>Open to conversations</span>
+          </div>
+        </div>
+        </div>
+
+        {/* Portrait. Framed rather than dropped in raw, so the illustration
+            reads as part of the palette instead of pasted on top of it. */}
+        <div
+          className="rise-slide relative hidden justify-self-center md:block"
+          style={{ "--rise-delay": "200ms" } as CSSProperties}
+        >
+          <div className="relative grid size-[300px] place-items-center lg:size-[380px]">
+            {/* Accent wash behind the figure */}
+            <div
+              aria-hidden
+              className="absolute inset-0 rounded-full blur-2xl"
+              style={{
+                background:
+                  "radial-gradient(circle at 50% 55%, var(--glow-a), transparent 68%)",
+              }}
+            />
+            {/* Containing ring */}
+            <div
+              aria-hidden
+              className="absolute inset-0 rounded-full border border-primary/15 bg-card/20 backdrop-blur-[2px]"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-6 rounded-full border border-border/60"
+            />
+
+            <Image
+              src="/images/heroImage.png"
+              alt="Illustration of Bijit at a laptop"
+              width={334}
+              height={360}
+              priority
+              sizes="(max-width: 1024px) 300px, 380px"
+              className="float-y relative w-[74%] drop-shadow-[0_18px_36px_rgba(0,0,0,0.45)] motion-reduce:animate-none"
+            />
           </div>
         </div>
       </div>
