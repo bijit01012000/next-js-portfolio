@@ -14,11 +14,11 @@ export const site = {
   location: "India",
 } as const;
 
-/** Rotating roles in the hero. Ordered strongest-signal-first. */
+/** Rotating roles in the hero, mirroring the resume headline: "Backend & AI Engineer | Distributed Systems | LLM / RAG | Observability". */
 export const roles = [
-  "Full-Stack Engineer",
-  "Backend Engineer",
-  "GenAI Systems Builder",
+  "Backend & AI Engineer",
+  "Distributed Systems Engineer",
+  "LLM / RAG Engineer",
   "Observability Engineer",
 ] as const;
 
