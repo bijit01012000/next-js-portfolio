@@ -13,6 +13,16 @@ const nextConfig = {
   async headers() {
     return [
       {
+        // Must precede the wildcard below so the more specific source wins:
+        // browsers revalidate every time (cheap 304) instead of serving a
+        // stale cached resume.
+        source: "/resume.pdf",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
+        ],
+      },
+      {
+        source: "/:path*",
         source: "/:path*",
         headers: [
           { key: "X-Content-Type-Options", value: "nosniff" },
