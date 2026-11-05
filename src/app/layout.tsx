@@ -13,7 +13,7 @@ const jsonLd = {
   name: site.name,
   url: site.url,
   email: `mailto:${site.email}`,
-  jobTitle: "Software Development Engineer 2",
+  jobTitle: "Senior Software Engineer",
   worksFor: { "@type": "Organization", name: "Rakuten Symphony" },
   alumniOf: {
     "@type": "CollegeOrUniversity",
@@ -57,9 +57,10 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: [
     "Bijit Sahu",
-    "SDE 2",
+    "Senior Software Engineer",
     "Rakuten Symphony",
     "Backend Engineer",
+    "Backend & AI Engineer",
     "Spring Boot",
     "GenAI",
     "RAG",

@@ -1,11 +1,11 @@
 export const site = {
   name: "Bijit Sahu",
-  role: "SDE 2 @ Rakuten Symphony",
+  role: "Senior Software Engineer @ Rakuten Symphony",
   // One-line value proposition shown under the hero headline.
   tagline:
     "I build AI-powered, observable backend systems — from RAG platforms on Spring Boot to automated root-cause analysis for distributed services.",
   description:
-    "Bijit Sahu — SDE 2 at Rakuten Symphony. Full-stack and GenAI engineer building observability platforms, RAG systems, and distributed backends with Java, Spring Boot, and React.",
+    "Bijit Sahu — Senior Software Engineer at Rakuten Symphony. Backend & AI engineer with 3+ years building distributed systems, observability platforms, and LLM / RAG applications with Java, Spring Boot, and Kafka.",
   url: "https://next-js-portfolio-sigma-woad.vercel.app",
   email: "bijit01012000@gmail.com",
   github: "https://github.com/bijit01012000",

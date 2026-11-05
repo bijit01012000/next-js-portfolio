@@ -36,13 +36,14 @@ export const projects: Project[] = [
     title: "Tixolve",
     tagline: "AI knowledge & support platform",
     description:
-      "An enterprise knowledge assistant fused with a support ticketing system, built as six independently deployable services. Users chat with an AI that answers from company documents with cited sources; when it signals low confidence — or the retrieved content scores below the similarity threshold — it auto-escalates to a human ticket rather than guessing. Redis caches responses, Kafka drives the ticket workflow.",
+      "An enterprise knowledge assistant fused with a support ticketing system, built as six independently deployable services. Users chat with an AI that answers from company documents with cited sources; when it signals low confidence — or the retrieved content scores below the similarity threshold — it auto-escalates to a human ticket rather than guessing. Retrieval is hybrid over PostgreSQL/pgvector, Kafka drives the ticket workflow, and status tracking and live notifications run over WebSockets.",
     featured: true,
     year: "Aug 2025 — Present",
     repo: "https://github.com/bijit01012000/Tixolve",
     stack: [
       "Java 21",
       "Spring Boot",
+      "Spring AI",
       "Spring Cloud Gateway",
       "Keycloak",
       "PostgreSQL",
@@ -50,6 +51,7 @@ export const projects: Project[] = [
       "Kafka",
       "Redis",
       "Ollama",
+      "WebSockets",
       "React",
       "TypeScript",
       "Material UI",
@@ -82,7 +84,7 @@ export const projects: Project[] = [
       },
       {
         name: "notification-service",
-        detail: "Async delivery of ticket and conversation events",
+        detail: "WebSocket live notifications and async ticket events",
       },
     ],
     decision: {
